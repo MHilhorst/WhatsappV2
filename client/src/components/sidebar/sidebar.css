@@ -1,0 +1,15 @@
+.sidebar {
+  border-right: 1px solid #9e9fa8;
+  width: 5rem;
+  height: 100vh;
+  background-color: #111322;
+}
+
+.sidebar-header {
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 15px;
+}

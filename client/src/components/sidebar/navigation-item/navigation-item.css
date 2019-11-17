@@ -1,0 +1,15 @@
+.sidebar-navigation-item {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+.nav-item-sidebar-text {
+  color: #ffffff;
+  font-size: 12px;
+  font-variant: small-caps;
+}
+
+.break {
+  flex-basis: 100%;
+  height: 0;
+}
