@@ -1,14 +1,10 @@
-.container-fluid {
-  padding: 0;
-}
-
-.box {
-  background-color: white;
-  border-radius: 5px;
-  padding: 15px;
-}
 .navigation {
   background-color: #ffffff;
   border-bottom: 1px solid #e6e7ec;
-  color: "white";
+  color: 'white';
+}
+
+.no-gutters {
+  padding-left: 0 !important;
+  padding-right: 0 !important;
 }

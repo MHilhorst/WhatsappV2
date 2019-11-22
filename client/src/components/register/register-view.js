@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react';
 import {
   Container,
   Row,
@@ -8,17 +8,16 @@ import {
   Label,
   Input,
   Button
-} from "reactstrap";
-import "./register.css";
-import { config } from "../../config";
-import Cookies from "js-cookie";
+} from 'reactstrap';
+import './register.css';
+import { config } from '../../config';
 
 class RegisterView extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      email: "",
-      password: ""
+      email: '',
+      password: ''
     };
     this.handleEmailChange = this.handleEmailChange.bind(this);
     this.handlePasswordChange = this.handlePasswordChange.bind(this);
@@ -34,10 +33,10 @@ class RegisterView extends React.Component {
 
   handleRegister() {
     fetch(`${config.host}/api/auth/register`, {
-      method: "POST",
+      method: 'POST',
       headers: {
-        Accept: "application/json",
-        "Content-Type": "application/json"
+        Accept: 'application/json',
+        'Content-Type': 'application/json'
       },
       body: JSON.stringify({
         email: this.state.email,
@@ -47,7 +46,7 @@ class RegisterView extends React.Component {
       .then(res => res.json())
       .then(data => {
         console.log(data);
-        this.props.history.push("/login");
+        this.props.history.push('/login');
         // const { token } = data;
         // Cookies.set("token", token);
         // this.props.history.push("/dashboard");

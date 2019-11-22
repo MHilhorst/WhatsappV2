@@ -1,21 +1,18 @@
-import React from "react";
+import React from 'react';
 import {
   Collapse,
   Navbar,
   NavbarToggler,
-  NavbarBrand,
   Nav,
   NavItem,
   NavLink,
   UncontrolledDropdown,
   DropdownToggle,
   DropdownMenu,
-  DropdownItem,
-  Container
-} from "reactstrap";
+  DropdownItem
+} from 'reactstrap';
 
-import { logout } from "../../utils/auth";
-import { config } from "../../config";
+import { logout } from '../../utils/auth';
 class MainNavbar extends React.Component {
   constructor(props) {
     super(props);
@@ -36,7 +33,7 @@ class MainNavbar extends React.Component {
   render() {
     const { isOpen } = this.state;
     return (
-      <div className="sticky-top">
+      <div className="sticky-top" style={{ width: '100%' }}>
         <Navbar className="navigation" light expand="md">
           <NavbarToggler onClick={this.toggle} />
           <Collapse isOpen={isOpen} navbar>

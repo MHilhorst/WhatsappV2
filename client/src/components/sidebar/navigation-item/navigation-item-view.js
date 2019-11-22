@@ -8,9 +8,9 @@ class NavigationItemView extends React.Component {
   render() {
     return (
       <a href={this.props.url} className="sidebar-navigation-item">
-        <img src={this.props.image} width={30} style={{ borderRadius: 5 }} />
+        {this.props.icon}
         <div className="break"></div>
-        <p className="nav-item-sidebar-text">{this.props.brand}</p>
+        <p className="nav-item-sidebar-text">{this.props.step}</p>
       </a>
     );
   }

@@ -3,8 +3,9 @@ import { Container, Row, Col } from 'reactstrap';
 import MainNavbar from '../components/navbar';
 import MainSidebar from '../components/sidebar';
 import { Helmet } from 'react-helmet';
+import Flexbox from 'flexbox-react';
 
-class DefaultLayout extends React.Component {
+class AltLayout extends React.Component {
   componentDidMount() {
     console.log('finish loading default layout');
   }
@@ -14,15 +15,15 @@ class DefaultLayout extends React.Component {
         <Helmet>
           <style>{`body { background-color:#f7f8fb; } `}</style>
         </Helmet>
-        <Container fluid>
-          <Row>
+        <Flexbox flexDirection="column" display="flex" height="100vh">
+          <Flexbox>
             <MainNavbar />
-            {this.props.children}
-          </Row>
-        </Container>
+          </Flexbox>
+          <Flexbox flex="1">{this.props.children}</Flexbox>
+        </Flexbox>
       </>
     );
   }
 }
 
-export default DefaultLayout;
+export default AltLayout;

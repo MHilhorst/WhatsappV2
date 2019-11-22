@@ -1,14 +1,19 @@
-import React from "react";
-import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
+import React from 'react';
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 
-import Home from "../home";
-import Login from "../login";
-import Register from "../register";
-import Dashboard from "../dashboard";
-import Profile from "../profile";
-import PrivateRoute from "./PrivateRoute";
-import { getSession } from "../../utils/auth";
-import DefaultLayout from "../../layout";
+import Login from '../login';
+import Register from '../register';
+import Dashboard from '../dashboard';
+import Profile from '../profile';
+import Create from '../create';
+import Browse from '../browse';
+import PrivateRoute from './PrivateRoute';
+import { getSession } from '../../utils/auth';
+import DefaultLayout from '../../layout';
+import { ThemeProvider } from 'styled-components';
+import theme from '../../styles/theme';
+import '../../styles/custom.css';
+import { GlobalStyle } from '../../styles/style';
 
 class App extends React.Component {
   constructor(props) {
@@ -25,26 +30,43 @@ class App extends React.Component {
   render() {
     if (!this.state.loading) {
       return (
-        <Router>
-          <Switch>
-            <Route exact path="/login" component={Login} />
-            <Route exact path="/register" component={Register} />
-            <PrivateRoute
-              exact
-              path="/dashboard"
-              component={Dashboard}
-              layout={DefaultLayout}
-              session={this.state.session}
-            />
-            <PrivateRoute
-              exact
-              path="/profile"
-              component={Profile}
-              layout={DefaultLayout}
-              session={this.state.session}
-            />
-          </Switch>
-        </Router>
+        <ThemeProvider theme={theme}>
+          <Router>
+            <Switch>
+              <Route exact path="/login" component={Login} />
+              <Route exact path="/register" component={Register} />
+              <PrivateRoute
+                exact
+                path="/dashboard"
+                component={Dashboard}
+                layout={DefaultLayout}
+                session={this.state.session}
+              />
+              <PrivateRoute
+                exact
+                path="/profile"
+                component={Profile}
+                layout={DefaultLayout}
+                session={this.state.session}
+              />
+              <PrivateRoute
+                exact
+                path="/new"
+                component={Create}
+                layout={DefaultLayout}
+                session={this.state.session}
+              />
+              <PrivateRoute
+                exact
+                path="/browse"
+                component={Browse}
+                layout={DefaultLayout}
+                session={this.state.session}
+              />
+            </Switch>
+          </Router>
+          <GlobalStyle />
+        </ThemeProvider>
       );
     } else {
       return null;
