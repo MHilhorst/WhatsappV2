@@ -3,8 +3,9 @@ import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 
 import Login from '../login';
 import Register from '../register';
-import Dashboard from '../dashboard';
+import Assignment from '../assignment';
 import Profile from '../profile';
+import Overview from '../overview';
 import Create from '../create';
 import Browse from '../browse';
 import PrivateRoute from './PrivateRoute';
@@ -37,8 +38,8 @@ class App extends React.Component {
               <Route exact path="/register" component={Register} />
               <PrivateRoute
                 exact
-                path="/dashboard"
-                component={Dashboard}
+                path="/overview"
+                component={Overview}
                 layout={DefaultLayout}
                 session={this.state.session}
               />
@@ -46,6 +47,12 @@ class App extends React.Component {
                 exact
                 path="/profile"
                 component={Profile}
+                layout={DefaultLayout}
+                session={this.state.session}
+              />
+              <PrivateRoute
+                path="/assignments/:id"
+                component={Assignment}
                 layout={DefaultLayout}
                 session={this.state.session}
               />

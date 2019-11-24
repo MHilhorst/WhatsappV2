@@ -39,16 +39,13 @@ class MainNavbar extends React.Component {
           <Collapse isOpen={isOpen} navbar>
             <Nav className="ml-auto" navbar>
               <NavItem>
-                <NavLink href="/components/" className="navigation-text">
+                <NavLink href="/profile" className="navigation-text">
                   Profile
                 </NavLink>
               </NavItem>
               <NavItem>
-                <NavLink
-                  href="https://github.com/reactstrap/reactstrap"
-                  className="navigation-text"
-                >
-                  Balance:
+                <NavLink href="/browse" className="navigation-text">
+                  Browse
                 </NavLink>
               </NavItem>
               <UncontrolledDropdown nav inNavbar>

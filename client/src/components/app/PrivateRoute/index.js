@@ -1,5 +1,5 @@
-import React from "react";
-import { Route, Redirect, withRouter } from "react-router-dom";
+import React from 'react';
+import { Route, Redirect, withRouter } from 'react-router-dom';
 class PrivateRoute extends React.Component {
   constructor(props) {
     super(props);
@@ -7,9 +7,7 @@ class PrivateRoute extends React.Component {
       loaded: true
     };
   }
-  componentDidMount() {
-    console.log(this.props.session);
-  }
+  componentDidMount() {}
   render() {
     const { component: Component, ...rest } = this.props;
     const { layout: Layout } = this.props;
@@ -21,12 +19,12 @@ class PrivateRoute extends React.Component {
         render={props => {
           return this.props.session ? (
             <Layout {...props}>
-              <Component {...props} />
+              <Component {...props} session={this.props.session} />
             </Layout>
           ) : (
             <Redirect
               to={{
-                pathname: "/auth"
+                pathname: '/auth'
               }}
             />
           );

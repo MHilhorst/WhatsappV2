@@ -1,4 +1,4 @@
-const mongoose = require('mongoose');
+const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
 const AssignmentSchema = new Schema({
@@ -23,7 +23,15 @@ const AssignmentSchema = new Schema({
   },
   user_id: {
     type: String
+  },
+  date: {
+    type: Date,
+    default: Date.now()
+  },
+  assignmentUrlId: {
+    type: Number,
+    default: Date.now().valueOf()
   }
 });
 
-module.exports = mongoose.model('assignment', AssignmentSchema);
+module.exports = mongoose.model("assignment", AssignmentSchema);

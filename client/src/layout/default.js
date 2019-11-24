@@ -1,12 +1,12 @@
 import React from 'react';
-import { Container, Row, Col } from 'reactstrap';
+import { Container, Row } from 'reactstrap';
 import MainNavbar from '../components/navbar';
-import MainSidebar from '../components/sidebar';
 import { Helmet } from 'react-helmet';
 
 class DefaultLayout extends React.Component {
-  componentDidMount() {
-    console.log('finish loading default layout');
+  constructor(props) {
+    super(props);
+    this.state = {};
   }
   render() {
     return (

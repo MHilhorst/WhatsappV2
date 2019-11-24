@@ -14,9 +14,17 @@ export const Box = styled.div`
   border: ${props =>
     props.border ? `1px solid ${props.theme.color.border}` : '0'}
   margin-top: ${props => `${props.marginTop}px`};
+  margin-bottom: ${props => `${props.marginBottom}px`};
     position:${props => (props.sticky ? 'sticky' : null)}
 `;
 
+export const AccordionToggle = styled.div`
+    background-color: ${props => props.theme.color.input}
+    border-top: ${props => `1px solid ${props.theme.color.border}`}
+    border-bottom: ${props => `1px solid ${props.theme.color.border}`}
+    padding-bottom:0.5rem;
+    padding-top:0.5rem;
+    `;
 export const Button = styled.button`
   background-color: ${props => props.theme.color.primary};
   border: 0;
@@ -26,6 +34,15 @@ export const Button = styled.button`
   border-radius: ${props => props.theme.radius.button};
 `;
 
+export const BoxedNumber = styled.span`
+    background-color: ${props => props.theme.color.green}
+    padding: 5px;
+    color:white;
+    font-size:0.8rem;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+`;
 export const Input = styled.input`
   background-color: ${props => props.theme.color.input};
   padding: 7px 15px;
@@ -57,6 +74,7 @@ export const HeaderText = styled.h1`
   color: ${props => props.theme.text.color.black};
   font-size: 1.5rem;
   font-weight: ${props => props.theme.text.weight.header};
+  margin: 0;
 `;
 export const CodeHeader = styled(HeaderText)`
   font-size: 1.2rem;
@@ -87,6 +105,8 @@ export const Divider = styled.div`
 export const Group = styled.div`
   padding-top: ${props => `${props.pt}rem` || null};
   padding-bottom: ${props => `${props.pb}rem` || null};
+  padding-left: ${props => `${props.pl}rem` || null};
+  padding-right: ${props => `${props.pr}rem` || null};
 `;
 
 export const TextArea = styled.textarea`
@@ -112,4 +132,9 @@ height:100%;
 border-radius: ${props => props.theme.radius.box}
 border: ${props => `2px dashed ${props.theme.color.border}`};
 margin-bottom:1rem;
+`;
+
+export const EditorButton = styled.button`
+  background-color: ${props => props.theme.color.editorButton};
+  border: 0;
 `;

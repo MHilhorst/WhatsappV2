@@ -2,7 +2,9 @@ const theme = {
   color: {
     primary: '#8c7ae6',
     input: '#fafbfc',
-    border: '#e6e7ec'
+    border: '#e6e7ec',
+    editorButton: '#e6e7ec',
+    green: '#2ecc71'
   },
   text: {
     color: {

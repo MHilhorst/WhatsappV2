@@ -1,16 +1,9 @@
 import React from 'react';
-import { Box, HeaderText, Text, Divider, LabelSmall } from '../../styles/style';
+import { Box, HeaderText, Text, LabelSmall } from '../../../styles/style';
 class BrowseView extends React.Component {
   render() {
     return (
-      <Box
-        border
-        marginTop={15}
-        padding={30}
-        color="white"
-        sticky={true}
-        style={{ top: 56.25 + 15 }}
-      >
+      <Box border marginTop={15} padding={30} color="white">
         <HeaderText>{this.props.title}</HeaderText>
         <Text>{this.props.description}</Text>
         <LabelSmall>
