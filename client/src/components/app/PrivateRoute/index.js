@@ -18,8 +18,12 @@ class PrivateRoute extends React.Component {
         {...rest}
         render={props => {
           return this.props.session ? (
-            <Layout {...props}>
-              <Component {...props} session={this.props.session} />
+            <Layout {...props} session={this.props.session}>
+              <Component
+                {...props}
+                session={this.props.session}
+                auth={this.props.auth}
+              />
             </Layout>
           ) : (
             <Redirect

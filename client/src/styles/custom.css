@@ -1,8 +1,4 @@
-.navigation {
-  background-color: #ffffff;
-  border-bottom: 1px solid #e6e7ec;
-  color: 'white';
-}
+@import url('https://fonts.googleapis.com/css?family=Roboto&display=swap');
 
 .no-gutters {
   padding-left: 0 !important;

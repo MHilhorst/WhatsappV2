@@ -1,1 +1,1 @@
-export { default } from './overview-view';
+export { default } from './overview-container';

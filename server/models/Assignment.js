@@ -1,4 +1,4 @@
-const mongoose = require("mongoose");
+const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const AssignmentSchema = new Schema({
@@ -21,8 +21,20 @@ const AssignmentSchema = new Schema({
   file_id: {
     type: String
   },
+  file_data: {
+    type: String
+  },
+  file_name: {
+    type: String
+  },
+  file_type: {
+    type: String
+  },
   user_id: {
     type: String
+  },
+  feedbackCount: {
+    type: Number
   },
   date: {
     type: Date,
@@ -34,4 +46,4 @@ const AssignmentSchema = new Schema({
   }
 });
 
-module.exports = mongoose.model("assignment", AssignmentSchema);
+module.exports = mongoose.model('assignment', AssignmentSchema);

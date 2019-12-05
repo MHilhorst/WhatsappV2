@@ -16,7 +16,7 @@ class DefaultLayout extends React.Component {
         </Helmet>
         <Container fluid>
           <Row>
-            <MainNavbar />
+            <MainNavbar session={this.props.session} />
             {this.props.children}
           </Row>
         </Container>

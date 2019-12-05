@@ -2,8 +2,7 @@ import styled, { createGlobalStyle } from 'styled-components';
 
 export const GlobalStyle = createGlobalStyle`
 body {
-    @import url('https://fonts.googleapis.com/css?family=Lato|Montserrat&display=swap');
-    font-family: 'Lato', sans-serif;
+    font-family: 'Roboto', sans-serif !important;
     min-height: 100%;
   }
 `;
@@ -117,6 +116,26 @@ export const TextArea = styled.textarea`
   width: ${props => (props.fullWidth ? '100%' : null)};
 `;
 
+export const NavigationBar = styled.div`
+  height: 57px;
+  background-color: white;
+  border-bottom: 1px solid ${props => props.theme.color.border};
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+`;
+export const NavigationItem = styled.div`
+  padding: 5px 10px;
+  margin-left: 0.7rem;
+  margin-right: 0.7rem;
+  &:hover {
+    background-color: ${props => props.theme.color.input};
+    border-radius: ${props => props.theme.radius.box};
+  }
+  ${Text}:hover {
+    color: ${props => props.theme.color.primaryv2};e
+  }
+`;
 export const UploadButton = styled.input`
   background-color: ${props => props.theme.color.primary};
   padding: 7px 15px;

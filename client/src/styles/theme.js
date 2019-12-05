@@ -4,7 +4,8 @@ const theme = {
     input: '#fafbfc',
     border: '#e6e7ec',
     editorButton: '#e6e7ec',
-    green: '#2ecc71'
+    green: '#2ecc71',
+    primaryv2: '#006cfa'
   },
   text: {
     color: {

@@ -14,8 +14,26 @@ import {
 } from '../../styles/style';
 import { Col, Row } from 'reactstrap';
 import Dropzone from 'react-dropzone';
+import Select from 'react-select';
 
 class CreateView extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      options: [
+        { value: 'javascript', label: 'Javascript' },
+        { value: 'python', label: 'Python' },
+        { value: 'cplusplus', label: 'C++' },
+        { value: 'react-js', label: 'React JS' },
+        { value: 'java', label: 'Java' },
+        { value: 'html', label: 'HTML' },
+        { value: 'css', label: 'CSS' },
+        { value: 'r', label: 'R' },
+        { value: 'node-js', label: 'Node JS' },
+        { value: 'csharp', label: 'C#' }
+      ]
+    };
+  }
   render() {
     return (
       <Container>
@@ -44,9 +62,12 @@ class CreateView extends React.Component {
               <Divider mt={1} mb={1} />
               <Group pb={1}>
                 <Label>Programming language</Label>
-                <Input
-                  placeholder="Select programming languages used"
-                  fullWidth
+                <Select
+                  isMulti
+                  name="colors"
+                  options={this.state.options}
+                  className="basic-multi-select"
+                  classNamePrefix="select"
                   onChange={this.props.handleProgrammingLanguage}
                 />
               </Group>

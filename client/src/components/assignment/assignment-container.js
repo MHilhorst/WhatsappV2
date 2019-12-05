@@ -2,6 +2,7 @@ import React from 'react';
 import AssignmentView from './assignment-view';
 import { config } from '../../config';
 import { convertToRaw } from 'draft-js';
+import { getJWT } from '../../utils/getJWT';
 class AssignmentContainer extends React.Component {
   constructor(props) {
     super(props);
@@ -9,10 +10,13 @@ class AssignmentContainer extends React.Component {
       assignment: {},
       owner: null,
       loading: true,
-      feedback: null
+      feedback: null,
+      jwt: null,
+      height: null
     };
     this.handleFeedback = this.handleFeedback.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.updateWindowDimensions = this.updateWindowDimensions.bind(this);
   }
   handleFeedback = feedback => {
     console.log(feedback);
@@ -20,16 +24,30 @@ class AssignmentContainer extends React.Component {
   };
   handleSubmit = () => {
     const feedback = convertToRaw(this.state.feedback);
+
+    fetch(`${config.host}/api/assignment/feedback/new`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `${this.state.jwt}`
+      },
+      body: JSON.stringify({
+        assignment_id: this.state.assignment._id,
+        feedback: JSON.stringify(feedback)
+      })
+    }).then(res => {
+      res.json().then(data => {
+        if (data.success) {
+          this.setState({ feedbackSuccess: true });
+        } else {
+          this.setState({ feedbackSuccess: false });
+        }
+      });
+    });
   };
 
-  checkOwner = assignment => {
-    if (assignment.user_id === this.props.session._id) {
-      this.setState({ owner: true, loading: false });
-    } else {
-      this.setState({ owner: false, loading: false });
-    }
-  };
   componentDidMount() {
+    const jwt = getJWT();
     fetch(`${config.host}/api/assignment/${this.props.match.params.id}`, {
       method: 'GET',
       headers: {
@@ -38,14 +56,20 @@ class AssignmentContainer extends React.Component {
     })
       .then(res =>
         res.json().then(data => {
-          console.log(data);
-          this.setState({ assignment: data.data });
-          this.checkOwner(data.data);
+          this.setState({ assignment: data.data, jwt: jwt, loading: false });
         })
       )
       .catch(err => {
         console.log(err);
       });
+    this.updateWindowDimensions();
+    window.addEventListener('resize', this.updateWindowDimensions);
+  }
+  componentWillUnmount() {
+    window.removeEventListener('resize', this.updateWindowDimensions);
+  }
+  updateWindowDimensions() {
+    this.setState({ height: window.innerHeight });
   }
   render() {
     if (this.state.loading) {
@@ -54,9 +78,9 @@ class AssignmentContainer extends React.Component {
       return (
         <AssignmentView
           assignment={this.state.assignment}
-          owner={this.state.owner}
           handleFeedback={this.handleFeedback}
           handleSubmit={this.handleSubmit}
+          height={this.state.height}
         />
       );
     }

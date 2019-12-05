@@ -5,6 +5,7 @@ import Login from '../login';
 import Register from '../register';
 import Assignment from '../assignment';
 import Profile from '../profile';
+import Result from '../result';
 import Overview from '../overview';
 import Create from '../create';
 import Browse from '../browse';
@@ -14,6 +15,7 @@ import DefaultLayout from '../../layout';
 import { ThemeProvider } from 'styled-components';
 import theme from '../../styles/theme';
 import '../../styles/custom.css';
+import { getJWT } from '../../utils/getJWT';
 import { GlobalStyle } from '../../styles/style';
 
 class App extends React.Component {
@@ -21,12 +23,15 @@ class App extends React.Component {
     super(props);
     this.state = {
       session: null,
-      loading: true
+      loading: true,
+      jwt: null
     };
   }
   componentDidMount() {
     const session = getSession();
-    this.setState({ session: session, loading: false });
+    const jwt = getJWT();
+
+    this.setState({ session: session, jwt, loading: false });
   }
   render() {
     if (!this.state.loading) {
@@ -42,6 +47,7 @@ class App extends React.Component {
                 component={Overview}
                 layout={DefaultLayout}
                 session={this.state.session}
+                auth={this.state.jwt}
               />
               <PrivateRoute
                 exact
@@ -49,10 +55,17 @@ class App extends React.Component {
                 component={Profile}
                 layout={DefaultLayout}
                 session={this.state.session}
+                auth={this.state.jwt}
               />
               <PrivateRoute
                 path="/assignments/:id"
                 component={Assignment}
+                layout={DefaultLayout}
+                session={this.state.session}
+              />
+              <PrivateRoute
+                path="/result/:id"
+                component={Result}
                 layout={DefaultLayout}
                 session={this.state.session}
               />

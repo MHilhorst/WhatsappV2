@@ -44,6 +44,8 @@ app.use(function(req, res, next) {
   req.io = io;
   next();
 });
+
 app.use('/api/auth', require('./routes/auth'));
 app.use('/api/assignment', require('./routes/assignment'));
+app.use('/api/users', require('./routes/user'));
 server.listen(5000, () => console.log(`Mixing it up on port ${PORT}`));

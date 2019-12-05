@@ -17,28 +17,29 @@ class CreateContainer extends React.Component {
     this.handleProblemDecription = this.handleProblemDecription.bind(this);
   }
 
-  handleTitleChange(e) {
+  handleTitleChange = e => {
     this.setState({ title: e.target.value });
-  }
-  handleDescriptionChange(e) {
+  };
+  handleDescriptionChange = e => {
     this.setState({ description: e.target.value });
-  }
-  handleProgrammingLanguage(e) {
-    this.setState({ programmingLanguage: e.target.value });
-  }
-  handleProblemDecription(e) {
+  };
+  handleProgrammingLanguage = e => {
+    this.setState({ programmingLanguage: e });
+  };
+  handleProblemDecription = e => {
     this.setState({ problemDescription: e.target.value });
-  }
+  };
 
   handleFileUpload(file) {
     this.setState({ files: file });
     const formData = new FormData();
-    formData.append('file', this.state.files[0]);
+    formData.append('file', this.state.files[0], 'text.py');
     fetch(`${config.host}/api/assignment/upload`, {
       method: 'POST',
       body: formData
     }).then(res =>
       res.json().then(data => {
+        console.log(data.file);
         this.setState({ fileId: data.file });
       })
     );
@@ -49,8 +50,7 @@ class CreateContainer extends React.Component {
     this.setState({ jwt: jwt });
   }
   handleCreate() {
-    const formData = new FormData();
-    formData.append('file', this.state.files[0]);
+    console.log(this.state.files[0]);
 
     fetch(`${config.host}/api/assignment/new`, {
       method: 'POST',
@@ -63,7 +63,9 @@ class CreateContainer extends React.Component {
         description: this.state.description,
         title: this.state.title,
         problemDescription: this.state.problemDescription,
-        programmingLanguage: this.state.programmingLanguage
+        programmingLanguage: this.state.programmingLanguage,
+        filename: this.state.files[0].name,
+        filetype: this.state.files[0].type
       })
     });
   }

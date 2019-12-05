@@ -10,25 +10,78 @@ import {
   Group
 } from '../../styles/style';
 import Select from 'react-select';
-
+import Dropzone from 'react-dropzone';
 class ProfileView extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      showChangeBar: false,
       options: [
-        { value: 'chocolate', label: 'Chocolate' },
-        { value: 'strawberry', label: 'Strawberry' },
-        { value: 'vanilla', label: 'Vanilla' }
+        { value: 'javascript', label: 'Javascript' },
+        { value: 'python', label: 'Python' },
+        { value: 'cplusplus', label: 'C++' },
+        { value: 'react-js', label: 'React JS' },
+        { value: 'java', label: 'Java' },
+        { value: 'html', label: 'HTML' },
+        { value: 'css', label: 'CSS' },
+        { value: 'r', label: 'R' },
+        { value: 'node-js', label: 'Node JS' },
+        { value: 'csharp', label: 'C#' }
       ]
     };
   }
+
   render() {
     return (
       <Container>
         <Row>
           <Col lg={{ size: 4 }}>
             <Box color="white" border marginTop={15} padding={30}>
-              <Text>Current LEVEL</Text>
+              <div
+                style={{
+                  display: 'flex',
+                  justifyContent: 'center',
+                  alignItems: 'center'
+                }}
+                onMouseOver={() => this.setState({ showChangeBar: true })}
+                onMouseLeave={() => this.setState({ showChangeBar: false })}
+              >
+                {this.state.showChangeBar && (
+                  <Dropzone onDrop={this.props.handleFileUpload}>
+                    {({ getRootProps, getInputProps }) => (
+                      <div
+                        {...getRootProps()}
+                        style={{
+                          position: 'absolute',
+                          top: 62,
+                          width: '8rem',
+                          height: '8rem',
+                          borderRadius: '5rem',
+                          backgroundColor: '#66768a',
+                          display: 'flex',
+                          justifyContent: 'center',
+                          alignItems: 'center',
+                          opacity: 0.6
+                        }}
+                      >
+                        <input {...getInputProps()} />
+
+                        <Text noMargin style={{ color: 'white', opacity: 1 }}>
+                          Upload
+                        </Text>
+                      </div>
+                    )}
+                  </Dropzone>
+                )}
+                <img
+                  src={require('../../assets/images/profile-picture.png')}
+                  style={{
+                    width: '10rem',
+                    height: '10rem',
+                    borderRadius: '5rem'
+                  }}
+                />
+              </div>
             </Box>
           </Col>
           <Col lg={{ size: 8 }}>
@@ -62,15 +115,18 @@ class ProfileView extends React.Component {
                 <Col>
                   <Text>Show Skills</Text>
                   <Select
-                    defaultValue={[]}
+                    defaultValue={this.props.user.programming_languages || []}
                     isMulti
                     name="colors"
                     options={this.state.options}
                     className="basic-multi-select"
                     classNamePrefix="select"
+                    onChange={this.props.handleSelectPL}
                   />
                   <Group pt={1}>
-                    <Button color="light">Save skills</Button>
+                    <Button color="light" onClick={this.props.handleSaveSkills}>
+                      Save skills
+                    </Button>
                   </Group>
                 </Col>
               </Row>
