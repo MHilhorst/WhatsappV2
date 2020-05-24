@@ -77,10 +77,17 @@ app.get('/bier/:number', async (req, res) => {
       amount: 1,
     };
     user.updates.push(update);
+    const average_beer =
+      user.beer_amount /
+      (new Date(Date.now() - new Date(user.created)).getTime() / 1000 / 86400);
     await user.save();
     await client.sendText(
       `${user.phone_number}@c.us`,
-      `Je hebt een biertje gepakt \n \n Totaal biertjes: ${user.beer_amount}. Geniet van je biertje!`
+      `*${
+        user.name
+      }*, Je hebt een biertje gepakt \n \n ---------------- \n- Totaal aantal biertjes: ${
+        user.beer_amount
+      } \n- Gemiddeld per dag: ${Math.round(Number(average_beer))} Biertjes`
     );
     res.status(200).send('Succesfully added 1 beer');
   } else {
