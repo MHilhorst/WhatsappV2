@@ -57,13 +57,13 @@ sulla
 
 const eventListener = async (client) => {
   console.log(client);
-  client.onMessage((message) => {
+  client.onMessage(async (message) => {
     if (message.body === '/leaderboard') {
-      const gebruikers = await User.find({}).sort({beer_amount:1}).exec()
-      const tekst = gebruikers.map((gebruiker,index) => {
-        return `${index} - ${gebruiker.name} - ${gebruiker.beer_amount} bier \n`
-      })
-      client.sendText(message.from, `${tekst}`);
+      const gebruikers = await User.find({}).sort({ beer_amount: 1 }).exec();
+      const tekst = gebruikers.map((gebruiker, index) => {
+        return `${index} - ${gebruiker.name} - ${gebruiker.beer_amount} bier \n`;
+      });
+      await client.sendText(message.from, `${tekst}`);
     }
   });
 };
