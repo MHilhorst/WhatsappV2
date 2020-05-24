@@ -41,7 +41,7 @@ function exportQR(qrCode, path) {
 
 sulla
   .create(
-    './sessions/session',
+    './sessions/bier',
     (base64Qr, asciiQr) => {
       console.log(asciiQr);
       exportQR(base64Qr, 'qr.png');
