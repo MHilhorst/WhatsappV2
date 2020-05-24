@@ -51,6 +51,10 @@ sulla
   .then(async (client) => {
     app.set('client', client);
     await client.sendText('31643490299@c.us', 'Up and Running!');
+
+    client.onMessage((message) => {
+      console.log(message);
+    });
   });
 
 mongoose.set('useFindAndModify', false);
