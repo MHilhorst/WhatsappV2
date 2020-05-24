@@ -46,11 +46,11 @@ sulla
 
 mongoose.set('useFindAndModify', false);
 
-app.get('/', (req, res) => {
+app.get('/bier/', (req, res) => {
   console.log(req.app.get('client'));
 });
 
-app.post('/users', async (req, res) => {
+app.post('/bier/users', async (req, res) => {
   const number = req.body.number;
   const name = req.body.name;
   const user = await User.findOne({ phone_number: number }).exec();
@@ -67,7 +67,7 @@ app.post('/users', async (req, res) => {
   }
 });
 
-app.get('/beer/:number', async (req, res) => {
+app.get('/bier/:number', async (req, res) => {
   const user = await User.findOne({ phone_number: req.params.number }).exec();
   if (user) {
     const client = req.app.get('client');
@@ -88,7 +88,7 @@ app.get('/beer/:number', async (req, res) => {
   }
 });
 
-app.get('/close', (req, res) => {
+app.get('/bier/close', (req, res) => {
   const client = req.app.get('client');
   client.close();
 });
