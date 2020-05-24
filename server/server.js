@@ -117,9 +117,7 @@ app.get('/bier/despo/:number', async (req, res) => {
     await user.save();
     await client.sendText(
       `${user.phone_number}@c.us`,
-      `*${
-        user.name
-      }*, Je hebt een despo gepakt \n \n ---------------- \n- Totaal aantal despo's: ${
+      `*${user.name}*, Je hebt een despo gepakt \n\n- Totaal aantal despo's: ${
         user.despo_amount
       } \n- Gemiddeld per dag: ${Math.round(Number(average_beer))} Despo's`
     );
@@ -152,7 +150,7 @@ app.get('/bier/:number', async (req, res) => {
       `${user.phone_number}@c.us`,
       `*${
         user.name
-      }*, Je hebt een biertje gepakt \n \n ---------------- \n- Totaal aantal biertjes: ${
+      }*, Je hebt een biertje gepakt \n\n- Totaal aantal biertjes: ${
         user.beer_amount
       } \n- Gemiddeld per dag: ${Math.round(Number(average_beer))} Biertjes`
     );
