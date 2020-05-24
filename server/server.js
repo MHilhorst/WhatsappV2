@@ -41,7 +41,7 @@ sulla
   )
   .then(async (client) => {
     app.set('client', client);
-    await client.sendText('31643685618@c.us', '👋 Hello from sulla!');
+    await client.sendText('31643490299@c.us', 'Up and Running!');
   });
 
 mongoose.set('useFindAndModify', false);
