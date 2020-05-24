@@ -7,7 +7,7 @@ const bodyParser = require('body-parser');
 const morgan = require('morgan');
 const compression = require('compression');
 const User = require('./models/User');
-
+const fs = require('fs');
 const PORT = process.env.PORT || 5000;
 
 const app = express();
@@ -21,6 +21,7 @@ const corsOptions = {
 
 app.use(morgan('dev'));
 app.use(cors(corsOptions));
+app.use(express.static('public'));
 app.use(compression());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
@@ -31,11 +32,18 @@ mongoose.connect(process.env.MONGO_KEY, async (err) => {
   }
 });
 
+function exportQR(qrCode, path) {
+  qrCode = qrCode.replace('data:image/png;base64,', '');
+  const imageBuffer = Buffer.from(qrCode, 'base64');
+
+  fs.writeFileSync(path, imageBuffer);
+}
+
 sulla
   .create(
     './sessions/session',
-    (qrCode, asciiQr) => {
-      console.log(asciiQr);
+    (base64Qr, asciiQr) => {
+      exportQR(base64Qr, './qr.png');
     },
     { logQR: true, useChrome: true }
   )
