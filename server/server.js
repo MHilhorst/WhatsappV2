@@ -68,10 +68,11 @@ const eventListener = async (client) => {
     }
     if (message.body === '/total') {
       const number = message.from.replace('@c.us', '');
-      const gebruiker = await User.find({ phone_number: number }).exec();
+      console.log(number);
+      const gebruiker = await User.findOne({ phone_number: number }).exec();
       await client.sendText(
         message.from,
-        `Desporados: ${gebruiker.despo_amount} \n Bier: ${gebruiker.beer_amount}`
+        `Desporados: ${gebruiker.despo_amount} \nBier: ${gebruiker.beer_amount}`
       );
     }
   });
