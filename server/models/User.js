@@ -6,6 +6,10 @@ const UserSchema = new Schema({
     type: Number,
     default: 0,
   },
+  despo_amount: {
+    type: Number,
+    default: 0,
+  },
   name: {
     type: String,
     required: true,

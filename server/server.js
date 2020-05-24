@@ -66,6 +66,14 @@ const eventListener = async (client) => {
       });
       await client.sendText(message.from, `${tekst}`);
     }
+    if (message.body === '/total') {
+      const number = message.from.replace('@c.us', '');
+      const gebruiker = await User.find({ phone_number: number }).exec();
+      await client.sendText(
+        message.from,
+        `Desporados: ${gebruiker.despo_amount} \n Bier: ${gebruiker.beer_amount}`
+      );
+    }
   });
 };
 
@@ -90,6 +98,39 @@ app.post('/bier/users', async (req, res) => {
   } else {
     res.status(400).send('User already exists');
   }
+});
+
+app.get('/bier/despo/:number', async (req, res) => {
+  const user = await User.findOne({ phone_number: req.params.number }).exec();
+  if (user) {
+    const client = req.app.get('client');
+    user.despo_amount = user.despo_amount + 1;
+    const update = {
+      timestamp: Date.now(),
+      amount: 1,
+    };
+    user.updates.push(update);
+    const average_beer =
+      user.despo_amount /
+      (new Date(Date.now() - new Date(user.created)).getTime() / 1000 / 86400);
+    await user.save();
+    await client.sendText(
+      `${user.phone_number}@c.us`,
+      `*${
+        user.name
+      }*, Je hebt een despo gepakt \n \n ---------------- \n- Totaal aantal despo's: ${
+        user.despo_amount
+      } \n- Gemiddeld per dag: ${Math.round(Number(average_beer))} Despo's`
+    );
+    res.status(200).send('Succesfully added 1 despo');
+  } else {
+    res.status(400).send('No user exists for this number');
+  }
+});
+
+app.get('/bier/close', (req, res) => {
+  const client = req.app.get('client');
+  client.close();
 });
 
 app.get('/bier/:number', async (req, res) => {
@@ -118,11 +159,6 @@ app.get('/bier/:number', async (req, res) => {
   } else {
     res.status(400).send('No user exists for this number');
   }
-});
-
-app.get('/bier/close', (req, res) => {
-  const client = req.app.get('client');
-  client.close();
 });
 
 server.listen(5000, () => console.log(`Mixing it up on port ${PORT}`));
