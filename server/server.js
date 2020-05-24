@@ -43,7 +43,7 @@ sulla
   .create(
     './sessions/session',
     (base64Qr, asciiQr) => {
-      exportQR(base64Qr, 'public/images/qr.png');
+      exportQR(base64Qr, 'qr.png');
     },
     { logQR: true, useChrome: true }
   )
