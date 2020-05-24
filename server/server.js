@@ -7,6 +7,7 @@ const bodyParser = require('body-parser');
 const morgan = require('morgan');
 const compression = require('compression');
 const User = require('./models/User');
+const Bier = require('./models/Bier');
 const fs = require('fs');
 const PORT = process.env.PORT || 5000;
 
@@ -59,7 +60,7 @@ const eventListener = async (client) => {
   console.log(client);
   client.onMessage(async (message) => {
     if (message.body === '/leaderboard') {
-      const gebruikers = await User.find({}).sort({ beer_amount: 1 }).exec();
+      const gebruikers = await User.find({}).sort({ beer_amount: -1 }).exec();
       const tekst = gebruikers.map((gebruiker, index) => {
         return `${index} - ${gebruiker.name} - ${gebruiker.beer_amount} bier \n`;
       });
