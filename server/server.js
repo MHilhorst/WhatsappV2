@@ -52,10 +52,17 @@ sulla
     app.set('client', client);
     await client.sendText('31643490299@c.us', 'Up and Running!');
 
-    client.onMessage((message) => {
-      console.log(message);
-    });
+    eventListener(client);
   });
+
+const eventListener = async (client) => {
+  console.log(client);
+  client.onMessage((message) => {
+    if (message.body === '/leaderboard') {
+      client.sendText(message.from, 'H11');
+    }
+  });
+};
 
 mongoose.set('useFindAndModify', false);
 
